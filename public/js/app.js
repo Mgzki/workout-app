@@ -19859,6 +19859,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _Layouts_Standard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/Standard.vue */ "./resources/js/Layouts/Standard.vue");
+/* harmony import */ var _Classes_Timer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Classes/Timer.js */ "./resources/js/Classes/Timer.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -19870,6 +19872,36 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     canLogin: Boolean,
     canRegister: Boolean
+  },
+  data: function data() {
+    return {
+      elapsedTime: 10 * 1000,
+      timer: undefined // running: False,
+
+    };
+  },
+  methods: {
+    start: function start() {
+      var _this = this;
+
+      this.timer = setInterval(function () {
+        _this.elapsedTime -= 1000;
+      }, 1000); // this.running = True;
+    },
+    stop: function stop() {
+      clearInterval(this.timer); // this.running = False,
+    },
+    reset: function reset() {
+      this.elapsedTime = 10 * 1000;
+    }
+  },
+  computed: {
+    formattedElapsedTime: function formattedElapsedTime() {
+      var date = new Date(null);
+      date.setSeconds(this.elapsedTime / 1000);
+      var utc = date.toUTCString();
+      return utc.substr(utc.indexOf(":") - 2, 8);
+    }
   }
 });
 
@@ -21331,17 +21363,102 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
-  "class": "text-8xl text-gray-700 "
-}, " 12:00 ", -1
-/* HOISTED */
-);
-
-var _hoisted_2 = [_hoisted_1];
+var _hoisted_1 = {
+  id: "app",
+  "class": "bg-gray-100 rounded-lg py-4 px-8 shadow-xs"
+};
+var _hoisted_2 = {
+  "class": "mx-auto justify-center bg-gray-200 rounded-xl my-4 shadow-xs"
+};
+var _hoisted_3 = {
+  key: 0,
+  "class": "text-8xl text-gray-700"
+};
+var _hoisted_4 = {
+  key: 1,
+  "class": "text-8xl text-red-500"
+};
+var _hoisted_5 = {
+  "class": "mx-auto flex justify-center"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, _hoisted_2);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.elapsedTime > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedElapsedTime), 1
+  /* TEXT */
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_4, "00:00:00"))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.start && $options.start.apply($options, arguments);
+    }),
+    "class": "bg-green-500 py-2 px-2 mx-3 rounded"
+  }, "Start"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.stop && $options.stop.apply($options, arguments);
+    }),
+    "class": "bg-gray-400 py-2 px-2 mx-3 rounded"
+  }, "Stop"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[2] || (_cache[2] = function () {
+      return $options.reset && $options.reset.apply($options, arguments);
+    }),
+    "class": "bg-red-500 py-2 px-2 mx-3 rounded"
+  }, "Reset")])]);
 }
+
+/***/ }),
+
+/***/ "./resources/js/Classes/Timer.js":
+/*!***************************************!*\
+  !*** ./resources/js/Classes/Timer.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Timer)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Timer = /*#__PURE__*/function () {
+  // Duration of the timer, input given in seconds
+  function Timer() {
+    _classCallCheck(this, Timer);
+
+    this.target = new Date().getTime() + 10 * 1000;
+    this.timeString = "";
+  } // Update the timer ever 1 sec
+
+
+  _createClass(Timer, [{
+    key: "updateTimer",
+    value: function updateTimer() {
+      // Get today's date and time
+      var now = new Date().getTime(); // Find the distance between now and the target date
+
+      var distance = this.target - now; // Time calculations for days, hours, minutes and seconds
+
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor(distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+      var minutes = Math.floor(distance % (1000 * 60 * 60) / (1000 * 60));
+      var seconds = Math.floor(distance % (1000 * 60) / 1000); // Output the result in an element with id="demo"
+
+      this.timeString = days + "d " + hours + "h " + minutes + "m " + seconds + "s "; // If the count down is over, write some text 
+
+      if (distance < 0) {
+        clearInterval(x);
+        this.timeString = "EXPIRED";
+      }
+
+      return distance;
+    }
+  }]);
+
+  return Timer;
+}();
+
+
 
 /***/ }),
 
