@@ -19394,12 +19394,14 @@ __webpack_require__.r(__webpack_exports__);
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Link
   },
   props: {
+    timers: Object,
     canLogin: Boolean,
     canRegister: Boolean
   },
   data: function data() {
     return {
-      elapsedTime: 10 * 1000,
+      elapsedTime: this.timers.duration * 1000,
+      setCounter: 0,
       timer: undefined // running: False,
 
     };
@@ -19416,7 +19418,7 @@ __webpack_require__.r(__webpack_exports__);
       clearInterval(this.timer); // this.running = False,
     },
     reset: function reset() {
-      this.elapsedTime = 10 * 1000;
+      this.elapsedTime = this.timers.duration * 1000;
     }
   },
   computed: {
@@ -19425,6 +19427,9 @@ __webpack_require__.r(__webpack_exports__);
       date.setSeconds(this.elapsedTime / 1000);
       var utc = date.toUTCString();
       return utc.substr(utc.indexOf(":") - 2, 8);
+    },
+    setsRemaining: function setsRemaining() {
+      return this.timers.sets - this.setCounter;
     }
   }
 });
@@ -19930,37 +19935,10 @@ __webpack_require__.r(__webpack_exports__);
     Timer: _Components_Timer_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
+    test: Object,
     canLogin: Boolean,
     canRegister: Boolean
-  } // data() {
-  //   return {
-  //     elapsedTime: 10 * 1000,
-  //     timer: undefined,
-  //     // running: False,
-  //   };
-  // },
-  // methods: {
-  //   start() {
-  //     this.timer = setInterval(() => {
-  //       this.elapsedTime -= 1000;
-  //     }, 1000)
-  //     // this.running = True;
-  //   },
-  //   stop() {
-  //     clearInterval(this.timer);
-  //     // this.running = False,
-  //   },
-  //   reset() {
-  //     this.elapsedTime = 10*1000;
-  //   }
-  // },
-  // computed: {
-  // formattedElapsedTime() {
-  //   const date = new Date(null);
-  //   date.setSeconds(this.elapsedTime / 1000);
-  //   const utc = date.toUTCString();
-  //   return utc.substr(utc.indexOf(":") - 2, 8);
-  // }
+  } // props : ['test']
 
 });
 
@@ -20285,38 +20263,68 @@ var _hoisted_1 = {
   "class": "bg-gray-100 rounded-lg py-4 px-8 shadow-xs my-10"
 };
 var _hoisted_2 = {
-  "class": "mx-auto justify-center bg-gray-200 rounded-xl my-4 shadow-xs"
+  "class": "font-bold text-xl"
 };
-var _hoisted_3 = {
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex justify-around font-semibold text-sm text-gray-500 mt-2"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Hours"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Minutes"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Seconds")], -1
+/* HOISTED */
+);
+
+var _hoisted_4 = {
+  "class": "mx-auto justify-center bg-gray-200 rounded-xl mb-4 shadow-xs"
+};
+var _hoisted_5 = {
   key: 0,
   "class": "text-8xl text-gray-700 px-4"
 };
-var _hoisted_4 = {
+var _hoisted_6 = {
   key: 1,
-  "class": "text-8xl text-red-500"
+  "class": "text-8xl text-red-500 px-4"
 };
-var _hoisted_5 = {
-  "class": "mx-auto flex justify-center"
+var _hoisted_7 = {
+  "class": "mx-auto flex justify-around"
+};
+var _hoisted_8 = {
+  "class": "bg-gray-200 rounded-xl mt-4 shadow-xs flex"
+};
+var _hoisted_9 = {
+  "class": "px-4 py-2 font-semibold text-md float-left"
+};
+var _hoisted_10 = {
+  "class": "px-4 py-2 font-semibold text-md float-right"
+};
+var _hoisted_11 = {
+  "class": "px-4 py-2 font-semibold text-md float-right"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.elapsedTime > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedElapsedTime), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.name), 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_4, "00:00:00"))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$data.elapsedTime > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedElapsedTime), 1
+  /* TEXT */
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h6", _hoisted_6, "00:00:00"))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.start && $options.start.apply($options, arguments);
     }),
-    "class": "bg-green-500 py-2 px-2 mx-3 rounded"
+    "class": "bg-green-500 py-2 px-6 mx-3 rounded"
   }, "Start"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.stop && $options.stop.apply($options, arguments);
     }),
-    "class": "bg-gray-400 py-2 px-2 mx-3 rounded"
+    "class": "bg-gray-400 py-2 px-6 mx-3 rounded"
   }, "Stop"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.reset && $options.reset.apply($options, arguments);
     }),
-    "class": "bg-red-500 py-2 px-2 mx-3 rounded"
-  }, "Reset")])]);
+    "class": "bg-red-500 py-2 px-6 mx-3 rounded"
+  }, "Reset")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_9, "Sets remaining: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.setsRemaining), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_10, "Total sets: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.sets), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_11, "Rest duration: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.rest) + "s ", 1
+  /* TEXT */
+  )])]);
 }
 
 /***/ }),
@@ -21482,9 +21490,13 @@ var _hoisted_1 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_timer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("timer");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div id=\"app\" class=\"bg-gray-100 rounded-lg py-4 px-8 shadow-xs my-10\">\n        <div class=\"mx-auto justify-center bg-gray-200 rounded-xl my-4 shadow-xs\">\n            <h6 v-if=\"elapsedTime > 0\" class=\"text-8xl text-gray-700 px-4\">{{ formattedElapsedTime }}</h6>\n            <h6 v-else class=\"text-8xl text-red-500\">00:00:00</h6>\n        </div>\n        <div class=\"mx-auto flex justify-center\">\n            <button @click=\"start\" class=\"bg-green-500 py-2 px-2 mx-3 rounded\">Start</button>\n            <button @click=\"stop\" class=\"bg-gray-400 py-2 px-2 mx-3 rounded\">Stop</button>\n            <button @click=\"reset\" class=\"bg-red-500 py-2 px-2 mx-3 rounded\">Reset</button>\n        </div>\n    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_timer)])], 2112
-  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  );
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_timer, {
+    canLogin: $props.canLogin,
+    canRegister: $props.canRegister,
+    timers: $props.test
+  }, null, 8
+  /* PROPS */
+  , ["canLogin", "canRegister", "timers"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\n        {{test.name}}\n      </div> ")]);
 }
 
 /***/ }),
