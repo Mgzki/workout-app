@@ -14,7 +14,12 @@ class CreateTimersTable extends Migration
     public function up()
     {
         Schema::create('timers', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unique();
+            $table->string('name');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->integer('sets');
+            $table->integer('duration');
+            $table->integer('rest');
             $table->timestamps();
         });
     }
