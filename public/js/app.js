@@ -19419,11 +19419,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      elapsedTime: this.timers.duration * 1000,
+      targetTime: this.timers.duration * 1000,
       restTime: this.timers.rest * 1000,
       setCounter: 0,
       timer: null,
-      running: false
+      started: false
     };
   },
   methods: {
@@ -19443,12 +19443,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     if (rest) {
                       _this.restTime -= 1000;
                     } else {
-                      _this.elapsedTime -= 1000;
+                      _this.targetTime -= 1000;
                     }
 
                     if (duration < 1000) {
                       clearInterval(_this.timer);
-                      resolve('resolved');
+                      resolve("resolved");
                     }
                   }, 1000);
                 });
@@ -19473,7 +19473,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _this2.wait(_this2.elapsedTime, false);
+                return _this2.wait(_this2.targetTime, false);
 
               case 2:
                 _this2.timer = _context2.sent;
@@ -19492,8 +19492,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.timer = null;
       }
     },
-    reset: function reset() {
-      this.elapsedTime = this.timers.duration * 1000;
+    reset: function reset(end) {
+      if (end) {
+        this.setCounter = 0;
+        this.started = false;
+        this.stop();
+      }
+
+      this.targetTime = this.timers.duration * 1000;
       this.restTime = this.timers.rest * 1000;
     },
     startSet: function startSet() {
@@ -19528,28 +19534,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
+                _this4.started = true;
                 _this4.setCounter;
 
-              case 1:
+              case 2:
                 if (!(_this4.setCounter < _this4.timers.sets)) {
-                  _context4.next = 9;
+                  _context4.next = 10;
                   break;
                 }
 
-                _context4.next = 4;
+                _context4.next = 5;
                 return _this4.startSet();
 
-              case 4:
-                _this4.reset();
+              case 5:
+                _this4.reset(false);
 
                 _this4.setsRemaining;
 
-              case 6:
+              case 7:
                 _this4.setCounter++;
-                _context4.next = 1;
+                _context4.next = 2;
                 break;
 
-              case 9:
+              case 10:
+                _this4.reset(true);
+
+                _this4.started = false;
+
+              case 12:
               case "end":
                 return _context4.stop();
             }
@@ -19559,9 +19571,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   computed: {
-    formattedElapsedTime: function formattedElapsedTime() {
+    formattedTime: function formattedTime() {
       var date = new Date(null);
-      this.elapsedTime > 0 ? date.setSeconds(this.elapsedTime / 1000) : date.setSeconds(this.restTime / 1000);
+      this.targetTime > 0 ? date.setSeconds(this.targetTime / 1000) : date.setSeconds(this.restTime / 1000);
       var utc = date.toUTCString();
       return utc.substr(utc.indexOf(":") - 2, 8);
     },
@@ -20410,7 +20422,7 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_4 = {
-  "class": "mx-auto flex justify-center bg-gray-200 md:rounded-xl mb-4 shadow-xs md:border border-gray-300"
+  "class": "\n        mx-auto\n        flex\n        justify-center\n        bg-gray-200\n        md:rounded-xl\n        mb-4\n        shadow-xs\n        md:border\n        border-gray-300\n      "
 };
 var _hoisted_5 = {
   key: 0,
@@ -20428,48 +20440,72 @@ var _hoisted_8 = {
   "class": "mx-auto flex justify-around"
 };
 var _hoisted_9 = {
-  "class": "bg-gray-200 md:rounded-xl mt-4 shadow-xs flex md:border border-gray-300 text-sm md:text-md"
+  key: 1,
+  "class": "bg-gray-600 py-2 px-6 mx-3 rounded line-through"
 };
 var _hoisted_10 = {
+  "class": "md:rounded-xl mt-4 shadow-xs bg-gray-200 md:border border-gray-300"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"text-sm md:text-md flex justify-around\"><h1 class=\"px-4 py-2 font-semibold float-left\">Sets:</h1><h1 class=\"px-4 py-2 font-semibold float-center\">Total sets:</h1><h1 class=\"px-4 py-2 font-semibold float-right\">Rest(s):</h1><h1 class=\"px-4 py-2 font-semibold float-right\">Set time(s):</h1></div>", 1);
+
+var _hoisted_12 = {
+  "class": "text-sm md:text-md flex justify-around text-center"
+};
+var _hoisted_13 = {
   "class": "px-4 py-2 font-semibold float-left"
 };
-var _hoisted_11 = {
+var _hoisted_14 = {
+  "class": "px-4 py-2 font-semibold float-center"
+};
+var _hoisted_15 = {
   "class": "px-4 py-2 font-semibold float-right"
 };
-var _hoisted_12 = {
+var _hoisted_16 = {
   "class": "px-4 py-2 font-semibold float-right"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.name), 1
   /* TEXT */
-  ), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$data.elapsedTime > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedElapsedTime), 1
+  ), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$data.targetTime > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedTime), 1
   /* TEXT */
-  )) : $data.restTime > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedElapsedTime), 1
+  )) : $data.restTime > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedTime), 1
   /* TEXT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedElapsedTime), 1
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedTime), 1
   /* TEXT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [!$data.started ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 0,
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.allSets && $options.allSets.apply($options, arguments);
     }),
     "class": "bg-green-500 py-2 px-6 mx-3 rounded"
-  }, "Start"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Start ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_9, " Start ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.stop && $options.stop.apply($options, arguments);
     }),
     "class": "bg-gray-400 py-2 px-6 mx-3 rounded"
-  }, "Stop"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Stop "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.reset && $options.reset.apply($options, arguments);
     }),
     "class": "bg-red-500 py-2 px-6 mx-3 rounded"
-  }, "Reset")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_10, "Sets remaining: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.setsRemaining), 1
+  }, " Reset ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[3] || (_cache[3] = function () {
+      $props.timers.duration += 1;
+
+      _this.reset();
+    })
+  }, " Inc ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.setsRemaining), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_11, "Total sets: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.sets), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.sets), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_12, "Rest duration: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.rest) + "s ", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.rest), 1
   /* TEXT */
-  )])]);
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.duration), 1
+  /* TEXT */
+  )])])]);
 }
 
 /***/ }),
