@@ -24,7 +24,7 @@
             </div>
         </nav>
 
-        <div class="mx-auto max-w-4xl flex justify-center">
+        <div class="mx-auto max-w-6xl flex justify-center flex-wrap">
             <slot></slot>
         </div>
         

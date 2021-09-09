@@ -4,11 +4,14 @@
     class="bg-gray-100 rounded-lg py-4 md:px-8 shadow-xs my-10 border"
   >
     <h1 class="font-bold md:text-xl text-md pl-2">{{ timers.name }}</h1>
+    <!-- Time Descriptors -->
     <div class="flex justify-around font-semibold text-md text-gray-500 mt-2">
       <h1>Hours</h1>
       <h1>Minutes</h1>
       <h1>Seconds</h1>
     </div>
+
+    <!-- Time Display -->
     <div
       class="
         mx-auto
@@ -35,6 +38,8 @@
         {{ formattedTime }}
       </h1>
     </div>
+
+    <!-- Timer Controls -->
     <div class="mx-auto flex justify-around">
       <button v-if="!started" @click="allSets" class="bg-green-500 py-2 px-6 mx-3 rounded">
         Start
@@ -49,6 +54,8 @@
         Reset
       </button>
     </div>
+    
+    <!-- Timer Attributes -->
     <div
       class="md:rounded-xl mt-4 shadow-xs bg-gray-200 md:border border-gray-300"
     >

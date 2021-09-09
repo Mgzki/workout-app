@@ -2,6 +2,7 @@
 
 use App\Models\Timer;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,7 +26,19 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        'canLogin' => false,
+        'canRegister' => false,
+        'timers' => Auth::user()->timers()->get(),
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard/{timer:name}', function (Timer $timer) {
+    return Inertia::render('ShowTimer', [
+        'canLogin' => false,
+        'canRegister' => false,
+        'timer' => $timer,
+    ]);
+})->middleware(['auth', 'verified'])->name('timer');
 
 require __DIR__.'/auth.php';

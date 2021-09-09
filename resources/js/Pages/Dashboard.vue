@@ -1,7 +1,12 @@
 <template>
-    <Head title="Dashboard" />
+    <Head title="Account Dashboard" />
+    <div v-for="timer in timers" :key='timer.id'>
+        <div class="-my-8">
+            <TimerInfo :timer="timer" />
+        </div>
+    </div>
 
-    <BreezeAuthenticatedLayout>
+    <!-- <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Dashboard
@@ -17,17 +22,28 @@
                 </div>
             </div>
         </div>
-    </BreezeAuthenticatedLayout>
+    </BreezeAuthenticatedLayout> -->
 </template>
 
 <script>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue'
+import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
+import TimerInfo from '../Components/TimerInfo.vue'
+import StandardLayout from '@/Layouts/Standard.vue';
 import { Head } from '@inertiajs/inertia-vue3';
+import Standard from '@/Layouts/Standard.vue';
 
 export default {
+    layout: StandardLayout,
     components: {
         BreezeAuthenticatedLayout,
         Head,
+        Standard,
+        TimerInfo,
     },
+    props: {
+        timers: [Object],
+        canLogin: Boolean,
+        canRegister: Boolean,
+    }
 }
 </script>
