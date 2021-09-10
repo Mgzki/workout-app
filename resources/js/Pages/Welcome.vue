@@ -3,7 +3,7 @@
     <timer
       :canLogin="canLogin"
       :canRegister="canRegister"
-      :timers="test"
+      :currTimer="guestTimer"
     ></timer>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
     Timer,
   },
   props: {
-    test: Object,
+    guestTimer: Object,
     canLogin: Boolean,
     canRegister: Boolean,
   },

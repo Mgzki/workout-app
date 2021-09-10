@@ -19413,14 +19413,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link
   },
   props: {
-    timers: Object,
+    currTimer: Object,
     canLogin: Boolean,
     canRegister: Boolean
   },
   data: function data() {
     return {
-      targetTime: this.timers.duration * 1000,
-      restTime: this.timers.rest * 1000,
+      targetTime: this.currTimer.duration * 1000,
+      restTime: this.currTimer.rest * 1000,
       setCounter: 0,
       timer: null,
       started: false
@@ -19499,8 +19499,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.stop();
       }
 
-      this.targetTime = this.timers.duration * 1000;
-      this.restTime = this.timers.rest * 1000;
+      this.targetTime = this.currTimer.duration * 1000;
+      this.restTime = this.currTimer.rest * 1000;
     },
     startSet: function startSet() {
       var _this3 = this;
@@ -19538,7 +19538,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this4.setCounter;
 
               case 2:
-                if (!(_this4.setCounter < _this4.timers.sets)) {
+                if (!(_this4.setCounter < _this4.currTimer.sets)) {
                   _context4.next = 10;
                   break;
                 }
@@ -19568,6 +19568,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }))();
+    },
+    updateCurrTimer: function updateCurrTimer(newTimer) {
+      this.currTimer = newTimer;
     }
   },
   computed: {
@@ -19578,7 +19581,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return utc.substr(utc.indexOf(":") - 2, 8);
     },
     setsRemaining: function setsRemaining() {
-      return this.timers.sets - this.setCounter;
+      return this.currTimer.sets - this.setCounter;
     }
   }
 });
@@ -19604,6 +19607,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     timer: Object
+  },
+  methods: {
+    updateCurrTimer: function updateCurrTimer() {
+      this.$emit('updateCurrTimer', this.timer);
+    }
   } //   data() {
   //     const timer = {
   //         name: this.timer.name,
@@ -20080,25 +20088,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/Authenticated.vue */ "./resources/js/Layouts/Authenticated.vue");
 /* harmony import */ var _Components_TimerInfo_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/TimerInfo.vue */ "./resources/js/Components/TimerInfo.vue");
-/* harmony import */ var _Layouts_Standard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Layouts/Standard.vue */ "./resources/js/Layouts/Standard.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _Components_Timer_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/Timer.vue */ "./resources/js/Components/Timer.vue");
+/* harmony import */ var _Layouts_Standard_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Layouts/Standard.vue */ "./resources/js/Layouts/Standard.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  layout: _Layouts_Standard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+  layout: _Layouts_Standard_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   components: {
     BreezeAuthenticatedLayout: _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_3__.Head,
-    Standard: _Layouts_Standard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    TimerInfo: _Components_TimerInfo_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.Head,
+    TimerInfo: _Components_TimerInfo_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Timer: _Components_Timer_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      currTimer: this.timers[0]
+    };
   },
   props: {
     timers: [Object],
     canLogin: Boolean,
     canRegister: Boolean
+  },
+  methods: {
+    updateCurrTimer: function updateCurrTimer(newTimer) {
+      this.currTimer = newTimer;
+    }
   }
 });
 
@@ -20158,7 +20177,7 @@ __webpack_require__.r(__webpack_exports__);
     Timer: _Components_Timer_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
-    test: Object,
+    guestTimer: Object,
     canLogin: Boolean,
     canRegister: Boolean
   }
@@ -20482,7 +20501,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   id: "app",
-  "class": "bg-gray-100 rounded-lg py-4 md:px-8 shadow-xs my-10 border"
+  "class": "bg-gray-100 rounded-lg py-4 md:px-8 shadow-xs my-10 border "
 };
 var _hoisted_2 = {
   "class": "font-bold md:text-xl text-md pl-2"
@@ -20520,27 +20539,38 @@ var _hoisted_10 = {
   "class": "md:rounded-xl mt-4 shadow-xs bg-gray-200 md:border border-gray-300"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"text-sm md:text-md flex justify-around\"><h1 class=\"px-4 py-2 font-semibold float-left\">Sets:</h1><h1 class=\"px-4 py-2 font-semibold float-center\">Total sets:</h1><h1 class=\"px-4 py-2 font-semibold float-right\">Rest(s):</h1><h1 class=\"px-4 py-2 font-semibold float-right\">Set time(s):</h1></div>", 1);
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"text-sm md:text-md flex justify-around text-center\"><h1 class=\"px-4 py-2 font-semibold float-left w-32 \">Sets:</h1><h1 class=\"px-4 py-2 font-semibold float-center w-32\">Total sets:</h1><h1 class=\"px-4 py-2 font-semibold float-right w-32\">Rest(s):</h1><h1 class=\"px-4 py-2 font-semibold float-right w-32\">Set time(s):</h1></div>", 1);
 
 var _hoisted_12 = {
-  "class": "text-sm md:text-md flex justify-around text-center"
+  "class": "flex justify-around text-center"
 };
 var _hoisted_13 = {
-  "class": "px-4 py-2 font-semibold float-left"
+  "class": "text-sm md:text-md flex justify-around text-center"
 };
 var _hoisted_14 = {
-  "class": "px-4 py-2 font-semibold float-center"
+  "class": "px-4 py-2 font-semibold float-left"
 };
 var _hoisted_15 = {
-  "class": "px-4 py-2 font-semibold float-right"
+  "class": "px-4 py-2 font-semibold float-center"
 };
 var _hoisted_16 = {
   "class": "px-4 py-2 font-semibold float-right"
 };
+var _hoisted_17 = {
+  "class": "px-4 py-2 font-semibold float-right"
+};
+var _hoisted_18 = {
+  "class": "flex justify-around text-center mb-4"
+};
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, null, -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.name), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.name), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Time Descriptors "), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Time Display "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$data.targetTime > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedTime), 1
   /* TEXT */
@@ -20564,21 +20594,71 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.reset && $options.reset.apply($options, arguments);
     }),
     "class": "bg-red-500 py-2 px-6 mx-3 rounded"
-  }, " Reset ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Attributes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Reset ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Attributes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Temp Increment buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "px-5",
     onClick: _cache[3] || (_cache[3] = function () {
-      $props.timers.duration += 1;
+      $props.currTimer.duration += 1;
 
       _this.reset();
     })
-  }, " Inc ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.setsRemaining), 1
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "px-2 bg-green-500 rounded-xl",
+    onClick: _cache[4] || (_cache[4] = function () {
+      $props.currTimer.sets += 1;
+
+      _this.reset();
+    })
+  }, " Inc "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "px-2 bg-green-500 rounded-xl",
+    onClick: _cache[5] || (_cache[5] = function () {
+      $props.currTimer.rest += 1;
+
+      _this.reset();
+    })
+  }, " Inc "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "px-2 bg-green-500 rounded-xl",
+    onClick: _cache[6] || (_cache[6] = function () {
+      $props.currTimer.duration += 1;
+
+      _this.reset();
+    })
+  }, " Inc ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer info "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.setsRemaining), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.sets), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.sets), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.rest), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.rest), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timers.duration), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.duration), 1
   /* TEXT */
-  )])])]);
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Temp Decrement buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "px-6",
+    onClick: _cache[7] || (_cache[7] = function () {
+      $props.currTimer.duration -= 1;
+
+      _this.reset();
+    })
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "px-2 bg-red-500 rounded-xl",
+    onClick: _cache[8] || (_cache[8] = function () {
+      $props.currTimer.sets -= 1;
+
+      _this.reset();
+    })
+  }, " Dec "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "px-2 bg-red-500 rounded-xl",
+    onClick: _cache[9] || (_cache[9] = function () {
+      $props.currTimer.rest -= 1;
+
+      _this.reset();
+    })
+  }, " Dec "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "px-2 bg-red-500 rounded-xl",
+    onClick: _cache[10] || (_cache[10] = function () {
+      $props.currTimer.duration -= 1;
+
+      _this.reset();
+    })
+  }, " Dec ")])]), _hoisted_19]);
 }
 
 /***/ }),
@@ -20597,31 +20677,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  id: "app",
-  "class": "bg-gray-100 rounded-lg py-4 px-6 shadow-xs my-10 border w-64 mx-2 divide-y-2 divide-gray-300"
+  "class": "px-2 w-60"
+};
+var _hoisted_2 = {
+  "class": "font-bold"
+};
+var _hoisted_3 = {
+  "class": "flex px-2"
+};
+var _hoisted_4 = {
+  "class": "px-2"
+};
+var _hoisted_5 = {
+  "class": "px-2"
+};
+var _hoisted_6 = {
+  "class": "px-2"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
-
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <Link :href=\"route('timer', timer)\" class=\"font-bold\">{{ timer.name }}</Link> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-    href: _ctx.route('timer', $props.timer),
-    "class": "font-bold"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.name), 1
-      /* TEXT */
-      )];
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.updateCurrTimer && $options.updateCurrTimer.apply($options, arguments);
     }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Sets: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.sets), 1
+    id: "app",
+    "class": "bg-gray-100 rounded-lg py-4 px-6 shadow-xs my-10 border flex flex-grow mx-2 divide-x-2 divide-gray-300"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Duration: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.duration), 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, "Sets: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.sets), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Rest Period: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.rest), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, "Duration: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.duration), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, "Rest Period: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.rest), 1
   /* TEXT */
   )])]);
 }
@@ -21728,26 +21814,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "-my-8"
+  "class": "-my-8 max-w-4xl"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
+
+  var _component_timer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("timer");
 
   var _component_TimerInfo = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TimerInfo");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Account Dashboard"
-  }), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.timers, function (timer) {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_timer, {
+    canLogin: $props.canLogin,
+    canRegister: $props.canRegister,
+    currTimer: this.currTimer
+  }, null, 8
+  /* PROPS */
+  , ["canLogin", "canRegister", "currTimer"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.timers, function (timer) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: timer.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TimerInfo, {
-      timer: timer
+      timer: timer,
+      onUpdateCurrTimer: _cache[0] || (_cache[0] = function ($event) {
+        return $options.updateCurrTimer($event);
+      })
     }, null, 8
     /* PROPS */
     , ["timer"])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <BreezeAuthenticatedLayout>\n        <template #header>\n            <h2 class=\"font-semibold text-xl text-gray-800 leading-tight\">\n                Dashboard\n            </h2>\n        </template>\n\n        <div class=\"py-12\">\n            <div class=\"max-w-7xl mx-auto sm:px-6 lg:px-8\">\n                <div class=\"bg-white overflow-hidden shadow-sm sm:rounded-lg\">\n                    <div class=\"p-6 bg-white border-b border-gray-200\">\n                        You're logged in!\n                    </div>\n                </div>\n            </div>\n        </div>\n    </BreezeAuthenticatedLayout> ")], 64
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <BreezeAuthenticatedLayout>\n        <template #header>\n            <h2 class=\"font-semibold text-xl text-gray-800 leading-tight\">\n                Dashboard\n            </h2>\n        </template>\n\n        <div class=\"py-12\">\n            <div class=\"max-w-7xl mx-auto sm:px-6 lg:px-8\">\n                <div class=\"bg-white overflow-hidden shadow-sm sm:rounded-lg\">\n                    <div class=\"p-6 bg-white border-b border-gray-200\">\n                        You're logged in!\n                    </div>\n                </div>\n            </div>\n        </div>\n    </BreezeAuthenticatedLayout> ")], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -21806,10 +21903,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_timer, {
     canLogin: $props.canLogin,
     canRegister: $props.canRegister,
-    timers: $props.test
+    currTimer: $props.guestTimer
   }, null, 8
   /* PROPS */
-  , ["canLogin", "canRegister", "timers"])]);
+  , ["canLogin", "canRegister", "currTimer"])]);
 }
 
 /***/ }),

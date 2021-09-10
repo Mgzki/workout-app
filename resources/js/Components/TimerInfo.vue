@@ -1,18 +1,18 @@
 <template>
-  <div
+  <button
+    @click='updateCurrTimer'
     id="app"
-    class="bg-gray-100 rounded-lg py-4 px-6 shadow-xs my-10 border w-64 mx-2 divide-y-2 divide-gray-300"
+    class="bg-gray-100 rounded-lg py-4 px-6 shadow-xs my-10 border flex flex-grow mx-2 divide-x-2 divide-gray-300"
   >
-    <div>
-        <!-- <Link :href="route('timer', timer)" class="font-bold">{{ timer.name }}</Link> -->
-        <Link :href="route('timer', timer)" class="font-bold">{{ timer.name }}</Link>
+    <div class="px-2 w-60">
+        <h1 class="font-bold">{{timer.name}}</h1>
     </div>
-    <div>
-        <p>Sets: {{ timer.sets }}</p>
-        <p>Duration: {{ timer.duration }}</p>
-        <p>Rest Period: {{ timer.rest }}</p>
+    <div class="flex px-2">
+        <p class="px-2">Sets: {{ timer.sets }}</p>
+        <p class="px-2">Duration: {{ timer.duration }}</p>
+        <p class="px-2">Rest Period: {{ timer.rest }}</p>
     </div>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -24,6 +24,11 @@ export default {
   props: {
     timer: Object,
   },
+  methods: {
+      updateCurrTimer() {
+          this.$emit('updateCurrTimer', this.timer)
+      }
+  }
 //   data() {
 //     const timer = {
 //         name: this.timer.name,

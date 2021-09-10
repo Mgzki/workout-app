@@ -1,9 +1,9 @@
 <template>
   <div
     id="app"
-    class="bg-gray-100 rounded-lg py-4 md:px-8 shadow-xs my-10 border"
+    class="bg-gray-100 rounded-lg py-4 md:px-8 shadow-xs my-10 border "
   >
-    <h1 class="font-bold md:text-xl text-md pl-2">{{ timers.name }}</h1>
+    <h1 class="font-bold md:text-xl text-md pl-2">{{ currTimer.name }}</h1>
     <!-- Time Descriptors -->
     <div class="flex justify-around font-semibold text-md text-gray-500 mt-2">
       <h1>Hours</h1>
@@ -54,30 +54,64 @@
         Reset
       </button>
     </div>
-    
+
     <!-- Timer Attributes -->
     <div
       class="md:rounded-xl mt-4 shadow-xs bg-gray-200 md:border border-gray-300"
     >
-      <div class="text-sm md:text-md flex justify-around">
-        <h1 class="px-4 py-2 font-semibold float-left">Sets:</h1>
-        <h1 class="px-4 py-2 font-semibold float-center">Total sets:</h1>
-        <h1 class="px-4 py-2 font-semibold float-right">Rest(s):</h1>
-        <h1 class="px-4 py-2 font-semibold float-right">Set time(s):</h1>
+      <div class="text-sm md:text-md flex justify-around text-center">
+        <h1 class="px-4 py-2 font-semibold float-left w-32 ">Sets:</h1>
+        <h1 class="px-4 py-2 font-semibold float-center w-32">Total sets:</h1>
+        <h1 class="px-4 py-2 font-semibold float-right w-32">Rest(s):</h1>
+        <h1 class="px-4 py-2 font-semibold float-right w-32">Set time(s):</h1>
       </div>
-      <div>
-        <button
-          @click="() => { timers.duration += 1; this.reset()}">
+      <!-- Temp Increment buttons -->
+      <div class="flex justify-around text-center">
+        <button class="px-5"
+          @click="() => { currTimer.duration += 1; this.reset()}">
+            
+        </button>
+        <button class="px-2 bg-green-500 rounded-xl"
+          @click="() => { currTimer.sets += 1; this.reset()}">
+            Inc
+        </button>
+        <button class="px-2 bg-green-500 rounded-xl"
+          @click="() => { currTimer.rest += 1; this.reset()}">
+            Inc
+        </button>
+        <button class="px-2 bg-green-500 rounded-xl"
+          @click="() => { currTimer.duration += 1; this.reset()}">
             Inc
         </button>
       </div>
+      <!-- Timer info -->
       <div class="text-sm md:text-md flex justify-around text-center">
         <h1 class="px-4 py-2 font-semibold float-left">{{ setsRemaining }}</h1>
-        <h1 class="px-4 py-2 font-semibold float-center">{{ timers.sets }}</h1>
-        <h1 class="px-4 py-2 font-semibold float-right">{{ timers.rest }}</h1>
-        <h1 class="px-4 py-2 font-semibold float-right">{{ timers.duration }}</h1>
+        <h1 class="px-4 py-2 font-semibold float-center">{{ currTimer.sets }}</h1>
+        <h1 class="px-4 py-2 font-semibold float-right">{{ currTimer.rest }}</h1>
+        <h1 class="px-4 py-2 font-semibold float-right">{{ currTimer.duration }}</h1>
+      </div>
+      <!-- Temp Decrement buttons -->
+      <div class="flex justify-around text-center mb-4">
+        <button class="px-6"
+          @click="() => { currTimer.duration -= 1; this.reset()}">
+            
+        </button>
+        <button class="px-2 bg-red-500 rounded-xl"
+          @click="() => { currTimer.sets -= 1; this.reset()}">
+            Dec
+        </button>
+        <button class="px-2 bg-red-500 rounded-xl"
+          @click="() => { currTimer.rest -= 1; this.reset()}">
+            Dec
+        </button>
+        <button class="px-2 bg-red-500 rounded-xl"
+          @click="() => { currTimer.duration -= 1; this.reset()}">
+            Dec
+        </button>
       </div>
     </div>
+    <div></div>
   </div>
 </template>
 
@@ -92,14 +126,14 @@ export default {
     Link,
   },
   props: {
-    timers: Object,
+    currTimer: Object,
     canLogin: Boolean,
     canRegister: Boolean,
   },
   data() {
     return {
-      targetTime: this.timers.duration * 1000,
-      restTime: this.timers.rest * 1000,
+      targetTime: this.currTimer.duration * 1000,
+      restTime: this.currTimer.rest * 1000,
       setCounter: 0,
       timer: null,
       started: false,
@@ -137,8 +171,8 @@ export default {
           this.started = false;
           this.stop();
       }
-      this.targetTime = this.timers.duration * 1000;
-      this.restTime = this.timers.rest * 1000;
+      this.targetTime = this.currTimer.duration * 1000;
+      this.restTime = this.currTimer.rest * 1000;
       
     },
 
@@ -152,7 +186,7 @@ export default {
       this.started = true;
       for (
         this.setCounter;
-        this.setCounter < this.timers.sets;
+        this.setCounter < this.currTimer.sets;
         this.setCounter++
       ) {
         await this.startSet();
@@ -162,6 +196,9 @@ export default {
       this.reset(true);
       this.started = false;
     },
+    updateCurrTimer(newTimer) {
+      this.currTimer = newTimer;
+    }
   },
   computed: {
     formattedTime() {
@@ -173,7 +210,7 @@ export default {
       return utc.substr(utc.indexOf(":") - 2, 8);
     },
     setsRemaining() {
-      return this.timers.sets - this.setCounter;
+      return this.currTimer.sets - this.setCounter;
     },
   },
 };

@@ -1,12 +1,15 @@
 <template>
-    <Head title="Account Dashboard" />
-    <div v-for="timer in timers" :key='timer.id'>
-        <div class="-my-8">
-            <TimerInfo :timer="timer" />
-        </div>
+  <Head title="Account Dashboard" />
+  <div>
+    <timer :canLogin="canLogin" :canRegister="canRegister" :currTimer="this.currTimer" />
+    <div v-for="timer in timers" :key="timer.id">
+      <div class="-my-8 max-w-4xl">
+        <TimerInfo :timer="timer" @updateCurrTimer="updateCurrTimer($event)"/>
+      </div>
     </div>
+  </div>
 
-    <!-- <BreezeAuthenticatedLayout>
+  <!-- <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Dashboard
@@ -26,24 +29,34 @@
 </template>
 
 <script>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-import TimerInfo from '../Components/TimerInfo.vue'
-import StandardLayout from '@/Layouts/Standard.vue';
-import { Head } from '@inertiajs/inertia-vue3';
-import Standard from '@/Layouts/Standard.vue';
+import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
+import TimerInfo from "../Components/TimerInfo.vue";
+import Timer from "../Components/Timer.vue";
+import StandardLayout from "@/Layouts/Standard.vue";
+import { Head } from "@inertiajs/inertia-vue3";
 
 export default {
-    layout: StandardLayout,
-    components: {
-        BreezeAuthenticatedLayout,
-        Head,
-        Standard,
-        TimerInfo,
-    },
-    props: {
-        timers: [Object],
-        canLogin: Boolean,
-        canRegister: Boolean,
-    }
-}
+  layout: StandardLayout,
+  components: {
+    BreezeAuthenticatedLayout,
+    Head,
+    TimerInfo,
+    Timer,
+  },
+  data() {
+    return {
+      currTimer: this.timers[0],
+    };
+  },
+  props: {
+    timers: [Object],
+    canLogin: Boolean,
+    canRegister: Boolean,
+  },
+  methods: {
+    updateCurrTimer (newTimer) {
+          this.currTimer = newTimer;
+      }
+  }
+};
 </script>

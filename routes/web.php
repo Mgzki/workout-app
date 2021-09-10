@@ -21,7 +21,7 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'test' => Timer::first(),
+        'guestTimer' => Timer::first(),
     ]);
 });
 
