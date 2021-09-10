@@ -41,14 +41,17 @@
 
     <!-- Timer Controls -->
     <div class="mx-auto flex justify-around">
-      <button v-if="!started" @click="allSets" class="bg-green-500 py-2 px-6 mx-3 rounded">
+      <button v-if="!started | paused" @click="allSets" class="bg-green-500 py-2 px-6 mx-3 rounded">
         Start
       </button>
       <button v-else class="bg-gray-600 py-2 px-6 mx-3 rounded line-through">
         Start
       </button>
-      <button @click="stop" class="bg-gray-400 py-2 px-6 mx-3 rounded">
-        Stop
+      <button v-if="started && !paused" @click="stop" class="bg-gray-400 py-2 px-6 mx-3 rounded">
+        Pause
+      </button>
+      <button v-else class="bg-gray-600 py-2 px-6 mx-3 rounded line-through">
+        Pause
       </button>
       <button @click="reset" class="bg-red-500 py-2 px-6 mx-3 rounded">
         Reset
@@ -137,11 +140,13 @@ export default {
       setCounter: 0,
       timer: null,
       started: false,
+      paused: false,
     };
   },
   methods: {
     async wait(duration, rest) {
       return await new Promise((resolve) => {
+        this.paused = false;
         this.timer = setInterval(() => {
           duration -= 1000;
           if (rest) {
@@ -163,17 +168,19 @@ export default {
       if (this.timer) {
         clearInterval(this.timer);
         this.timer = null;
+        this.paused = true;
       }
     },
     reset(end) {
         if (end) {
           this.setCounter = 0;
           this.started = false;
+          
           this.stop();
       }
       this.targetTime = this.currTimer.duration * 1000;
       this.restTime = this.currTimer.rest * 1000;
-      
+      this.paused = false;
     },
 
     async startSet() {

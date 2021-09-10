@@ -19423,7 +19423,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       restTime: this.currTimer.rest * 1000,
       setCounter: 0,
       timer: null,
-      started: false
+      started: false,
+      paused: false
     };
   },
   methods: {
@@ -19437,6 +19438,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return new Promise(function (resolve) {
+                  _this.paused = false;
                   _this.timer = setInterval(function () {
                     duration -= 1000;
 
@@ -19490,6 +19492,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (this.timer) {
         clearInterval(this.timer);
         this.timer = null;
+        this.paused = true;
       }
     },
     reset: function reset(end) {
@@ -19501,6 +19504,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.targetTime = this.currTimer.duration * 1000;
       this.restTime = this.currTimer.rest * 1000;
+      this.paused = false;
     },
     startSet: function startSet() {
       var _this3 = this;
@@ -20536,34 +20540,38 @@ var _hoisted_9 = {
   "class": "bg-gray-600 py-2 px-6 mx-3 rounded line-through"
 };
 var _hoisted_10 = {
+  key: 3,
+  "class": "bg-gray-600 py-2 px-6 mx-3 rounded line-through"
+};
+var _hoisted_11 = {
   "class": "md:rounded-xl mt-4 shadow-xs bg-gray-200 md:border border-gray-300"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"text-sm md:text-md flex justify-around text-center\"><h1 class=\"px-4 py-2 font-semibold float-left w-32 \">Sets:</h1><h1 class=\"px-4 py-2 font-semibold float-center w-32\">Total sets:</h1><h1 class=\"px-4 py-2 font-semibold float-right w-32\">Rest(s):</h1><h1 class=\"px-4 py-2 font-semibold float-right w-32\">Set time(s):</h1></div>", 1);
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"text-sm md:text-md flex justify-around text-center\"><h1 class=\"px-4 py-2 font-semibold float-left w-32 \">Sets:</h1><h1 class=\"px-4 py-2 font-semibold float-center w-32\">Total sets:</h1><h1 class=\"px-4 py-2 font-semibold float-right w-32\">Rest(s):</h1><h1 class=\"px-4 py-2 font-semibold float-right w-32\">Set time(s):</h1></div>", 1);
 
-var _hoisted_12 = {
+var _hoisted_13 = {
   "class": "flex justify-around text-center"
 };
-var _hoisted_13 = {
+var _hoisted_14 = {
   "class": "text-sm md:text-md flex justify-around text-center"
 };
-var _hoisted_14 = {
+var _hoisted_15 = {
   "class": "px-4 py-2 font-semibold float-left"
 };
-var _hoisted_15 = {
-  "class": "px-4 py-2 font-semibold float-center"
-};
 var _hoisted_16 = {
-  "class": "px-4 py-2 font-semibold float-right"
+  "class": "px-4 py-2 font-semibold float-center"
 };
 var _hoisted_17 = {
   "class": "px-4 py-2 font-semibold float-right"
 };
 var _hoisted_18 = {
+  "class": "px-4 py-2 font-semibold float-right"
+};
+var _hoisted_19 = {
   "class": "flex justify-around text-center mb-4"
 };
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, null, -1
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, null, -1
 /* HOISTED */
 );
 
@@ -20578,23 +20586,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.formattedTime), 1
   /* TEXT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Controls "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [!$data.started ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Controls "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [!$data.started | $data.paused ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.allSets && $options.allSets.apply($options, arguments);
     }),
     "class": "bg-green-500 py-2 px-6 mx-3 rounded"
-  }, " Start ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_9, " Start ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Start ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_9, " Start ")), $data.started && !$data.paused ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    key: 2,
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.stop && $options.stop.apply($options, arguments);
     }),
     "class": "bg-gray-400 py-2 px-6 mx-3 rounded"
-  }, " Stop "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Pause ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_10, " Pause ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.reset && $options.reset.apply($options, arguments);
     }),
     "class": "bg-red-500 py-2 px-6 mx-3 rounded"
-  }, " Reset ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Attributes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Temp Increment buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Reset ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Attributes "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Temp Increment buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "px-5",
     onClick: _cache[3] || (_cache[3] = function () {
       $props.currTimer.duration += 1;
@@ -20622,15 +20631,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       _this.reset();
     })
-  }, " Inc ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer info "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.setsRemaining), 1
+  }, " Inc ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer info "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.setsRemaining), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.sets), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.sets), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.rest), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.rest), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.duration), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.currTimer.duration), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Temp Decrement buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Temp Decrement buttons "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "px-6",
     onClick: _cache[7] || (_cache[7] = function () {
       $props.currTimer.duration -= 1;
@@ -20658,7 +20667,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       _this.reset();
     })
-  }, " Dec ")])]), _hoisted_19]);
+  }, " Dec ")])]), _hoisted_20]);
 }
 
 /***/ }),
