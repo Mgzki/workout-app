@@ -1,10 +1,22 @@
 <template>
   <Head title="Account Dashboard" />
-  <div>
-    <timer :canLogin="canLogin" :canRegister="canRegister" :currTimer="this.currTimer" />
-    <div v-for="timer in timers" :key="timer.id">
-      <div class="-my-8 max-w-4xl">
-        <TimerInfo :timer="timer" @updateCurrTimer="updateCurrTimer($event)"/>
+  <div v-if="timers.length > 1">
+    <timer
+      :canLogin="canLogin"
+      :canRegister="canRegister"
+      :currTimer="this.currTimer"
+    />
+
+    <!-- Selectable timers -->
+    <div class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60">
+      <div v-for="timer in timers" :key="timer.id">
+        <div class="-my-8 max-w-4xl">
+          <TimerInfo
+            :timer="timer"
+            @updateCurrTimer="updateCurrTimer($event)"
+          />
+        </div>
+        <hr>
       </div>
     </div>
   </div>
@@ -54,9 +66,9 @@ export default {
     canRegister: Boolean,
   },
   methods: {
-    updateCurrTimer (newTimer) {
-          this.currTimer = newTimer;
-      }
-  }
+    updateCurrTimer(newTimer) {
+      this.currTimer = newTimer;
+    },
+  },
 };
 </script>
