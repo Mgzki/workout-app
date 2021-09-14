@@ -1,9 +1,11 @@
 <template>
   <div
     id="app"
-    class="bg-gray-100 rounded-lg py-4 md:px-8 shadow-xs my-10 border "
+    class="bg-gray-100 rounded-lg py-4 shadow-xs my-10 border md:px-8"
   >
-    <h1 class="font-bold md:text-xl text-md pl-2">{{ currTimer.name }}</h1>
+    <h1 class="font-bold text-md pl-2 md:text-xl">
+      {{ currTimer.name }}
+    </h1>
     <!-- Time Descriptors -->
     <div class="flex justify-around font-semibold text-md text-gray-500 mt-2">
       <h1>Hours</h1>
@@ -13,28 +15,20 @@
 
     <!-- Time Display -->
     <div
-      class="
-        mx-auto
-        flex
-        justify-center
-        bg-gray-200
-        md:rounded-xl
-        mb-4
-        shadow-xs
-        md:border
-        border-gray-300
+      class="mx-auto flex justify-center bg-gray-200 mb-4 shadow-xs  border-gray-300 
+      md:border md:rounded-xl
       "
     >
-      <h1 v-if="targetTime > 0" class="md:text-8xl text-6xl text-gray-700 px-4">
+      <h1 v-if="targetTime > 0" class=" text-6xl text-gray-700 px-4 md:text-8xl">
         {{ formattedTime }}
       </h1>
       <h1
         v-else-if="restTime > 0"
-        class="md:text-8xl text-6xl text-orange-500 px-4"
+        class=" text-6xl text-orange-500 px-4 md:text-8xl"
       >
         {{ formattedTime }}
       </h1>
-      <h1 v-else class="md:text-8xl text-6xl text-red-500 px-4">
+      <h1 v-else class=" text-6xl text-red-500 px-4 md:text-8xl">
         {{ formattedTime }}
       </h1>
     </div>
@@ -60,58 +54,22 @@
 
     <!-- Timer Attributes -->
     <div
-      class="md:rounded-xl mt-4 shadow-xs bg-gray-200 md:border border-gray-300"
+      class=" mt-4 shadow-xs bg-gray-200 md:border border-gray-300 md:rounded-xl"
     >
-      <div class="text-sm md:text-md flex justify-around text-center">
-        <h1 class="px-4 py-2 font-semibold float-left w-32 ">Sets:</h1>
-        <h1 class="px-4 py-2 font-semibold float-center w-32">Total sets:</h1>
-        <h1 class="px-4 py-2 font-semibold float-right w-32">Rest(s):</h1>
-        <h1 class="px-4 py-2 font-semibold float-right w-32">Set time(s):</h1>
+      <div class="text-sm  flex justify-around text-center md:text-md">
+        <InfoHeader>Sets:</InfoHeader>
+        <InfoHeader>Rest(s):</InfoHeader>
+        <InfoHeader>Duration(s):</InfoHeader>
       </div>
-      <!-- Temp Increment buttons -->
-      <div class="flex justify-around text-center">
-        <button class="px-5"
-          @click="() => { currTimer.duration += 1; this.reset()}">
-            
-        </button>
-        <button class="px-2 bg-green-500 rounded-xl"
-          @click="() => { currTimer.sets += 1; this.reset()}">
-            Inc
-        </button>
-        <button class="px-2 bg-green-500 rounded-xl"
-          @click="() => { currTimer.rest += 1; this.reset()}">
-            Inc
-        </button>
-        <button class="px-2 bg-green-500 rounded-xl"
-          @click="() => { currTimer.duration += 1; this.reset()}">
-            Inc
-        </button>
-      </div>
+
       <!-- Timer info -->
-      <div class="text-sm md:text-md flex justify-around text-center">
-        <h1 class="px-4 py-2 font-semibold float-left">{{ setsRemaining }}</h1>
-        <h1 class="px-4 py-2 font-semibold float-center">{{ currTimer.sets }}</h1>
-        <h1 class="px-4 py-2 font-semibold float-right">{{ currTimer.rest }}</h1>
-        <h1 class="px-4 py-2 font-semibold float-right">{{ currTimer.duration }}</h1>
-      </div>
-      <!-- Temp Decrement buttons -->
-      <div class="flex justify-around text-center mb-4">
-        <button class="px-6"
-          @click="() => { currTimer.duration -= 1; this.reset()}">
-            
-        </button>
-        <button class="px-2 bg-red-500 rounded-xl"
-          @click="() => { currTimer.sets -= 1; this.reset()}">
-            Dec
-        </button>
-        <button class="px-2 bg-red-500 rounded-xl"
-          @click="() => { currTimer.rest -= 1; this.reset()}">
-            Dec
-        </button>
-        <button class="px-2 bg-red-500 rounded-xl"
-          @click="() => { currTimer.duration -= 1; this.reset()}">
-            Dec
-        </button>
+      <div class="text-sm  flex justify-around text-center  md:text-md pb-4">
+        <InfoInput :val="setsRemaining" name="sets" 
+          @getVal="getVal($event)"/>
+        <InfoInput :val="currTimer.rest" name="rest"
+          @getVal="getVal($event)"/>
+        <InfoInput :val="currTimer.duration" name="duration"
+          @getVal="getVal($event)"/>
       </div>
     </div>
     <div></div>
@@ -121,12 +79,16 @@
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import StandardLayout from "@/Layouts/Standard.vue";
+import InfoInput from "@/Components/InfoInput.vue";
+import InfoHeader from "@/Components/InfoHeader.vue";
 
 export default {
   layout: StandardLayout,
   components: {
     Head,
     Link,
+    InfoInput,
+    InfoHeader,
   },
   props: {
     currTimer: Object,
@@ -205,6 +167,18 @@ export default {
     },
     updateCurrTimer(newTimer) {
       this.currTimer = newTimer;
+    },
+    getVal(newVal){
+      if (newVal.attrName == 'sets') {
+        this.currTimer.sets = newVal.newVal
+      } 
+      else if (newVal.attrName == 'rest') {
+        this.currTimer.rest = newVal.newVal
+      }
+      else {
+        this.currTimer.duration = newVal.newVal
+      }
+      this.reset()
     }
   },
   computed: {
