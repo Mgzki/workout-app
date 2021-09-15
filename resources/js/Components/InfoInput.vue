@@ -1,5 +1,4 @@
 <template>
-  <!-- <input type="text" :v-model="model" :placeholder="val" class="px-4 py-2 font-semibold float-left bg-gray-100 border border-gray-300 rounded-lg w-24 text-center"> -->
   <input
     v-on:keyup.enter="sendVal"
     v-model="newVal"

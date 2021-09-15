@@ -1,15 +1,14 @@
 <template>
   <button @click='updateCurrTimer'
-    class=" py-4 px-6 my-10 flex flex-grow mx-2 divide-x-2 divide-gray-300"
+    class=" py-4 md:px-2 my-10 flex flex-grow divide-x-2 divide-gray-300"
   >
-    <div class="px-2 w-60">
+    <div class="px-2 w-44 sm:w-60">
         <h1 class="font-bold text-left">{{timer.name}}</h1>
     </div>
-    <div class="flex px-2">
-        <p class="px-2">Sets: {{ timer.sets }}</p>
-        <p class="px-2">Rest(s): {{ timer.rest }}</p>
-        <p class="px-2">Duration(s): {{ timer.duration }}</p>
-        
+    <div class="flex  w-40 sm:w-56 justify-between">
+        <p class="px-2">{{ timer.sets }}</p>
+        <p class="px-2">{{ timer.rest }}</p>
+        <p class="px-2">{{ timer.duration }}</p>
     </div>
   </button>
 </template>
@@ -28,13 +27,6 @@ export default {
           this.$emit('updateCurrTimer', this.timer)
       }
   }
-//   data() {
-//     const timer = {
-//         name: this.timer.name,
-//         sets: this.timer.sets,
-//         duration: this.timer.duration,
-//         rest: this.timer.rest,
-//     }
-//   }
+
 };
 </script>

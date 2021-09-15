@@ -6,11 +6,16 @@
       :canRegister="canRegister"
       :currTimer="this.currTimer"
     />
-
+    <div class="flex flex-1 justify-around font-semibold underline pt-2 text-xs md:text-lg">
+        <p class="w-36 md:w-56 ml-2">Name</p>
+        <p class="px-1 md:px-4">Sets</p>
+        <p class="px-1 md:px-4">Rest(s)</p>
+        <p class="px-1 md:px-4">Duration(s)</p>
+    </div>
     <!-- Selectable timers -->
     <div v-if="timers.length > 1" class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60">
-      <div v-for="timer in timers" :key="timer.id">
-        <div class="-my-8 max-w-4xl">
+      <div v-for="timer in timers" :key="timer.id" class="hover:bg-blue-300">
+        <div class="-my-8 ">
           <TimerInfo
             :timer="timer"
             @updateCurrTimer="updateCurrTimer($event)"

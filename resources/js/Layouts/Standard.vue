@@ -1,5 +1,5 @@
 <template>
-    <section class="px-6 py-8">
+    <section class="px-3 py-4 md:px-6 md:py-8">
         <nav class="md:flex md:justify-between md:items-center">
             <div>
                 <a href="/">
@@ -24,7 +24,7 @@
             </div>
         </nav>
 
-        <div class="mx-auto max-w-6xl flex justify-center flex-wrap">
+        <div class="mx-auto flex justify-center flex-wrap">
             <slot></slot>
         </div>
         
