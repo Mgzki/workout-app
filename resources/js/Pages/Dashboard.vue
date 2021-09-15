@@ -26,7 +26,11 @@
         <hr>
       </div>
     </div>
+    <div class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60 mt-2">
+      <CreateTimer/>
+    </div>
   </div>
+  
 
   <!-- <BreezeAuthenticatedLayout>
         <template #header>
@@ -51,6 +55,7 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import TimerInfo from "../Components/TimerInfo.vue";
 import Timer from "../Components/Timer.vue";
+import CreateTimer from "../Components/CreateTimer.vue";
 import StandardLayout from "@/Layouts/Standard.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 
@@ -61,6 +66,7 @@ export default {
     Head,
     TimerInfo,
     Timer,
+    CreateTimer,
   },
   data() {
     return {
@@ -78,6 +84,7 @@ export default {
       this.currTimer = newTimer;
       this.timerKey += 1;
     },
+    
   },
 };
 </script>

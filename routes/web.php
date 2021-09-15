@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TimerController;
 use App\Models\Timer;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
@@ -25,20 +26,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard', [
-        'canLogin' => false,
-        'canRegister' => false,
-        'timers' => Auth::user()->timers()->get(),
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard', [
+//         'canLogin' => false,
+//         'canRegister' => false,
+//         'timers' => Auth::user()->timers()->get(),
+//     ]);
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard/{timer:name}', function (Timer $timer) {
-    return Inertia::render('ShowTimer', [
-        'canLogin' => false,
-        'canRegister' => false,
-        'timer' => $timer,
-    ]);
-})->middleware(['auth', 'verified'])->name('timer');
+Route::get('/dashboard', [TimerController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('/dashboard', [TimerController::class, 'store'])->middleware(['auth', 'verified'])->name('timer.store');
+Route::patch('/dashboard/{timer}', [TimerController::class, 'update'])->middleware(['auth', 'verified'])->name('timer.update');
+Route::delete('/dashboard/{timer}', [TimerController::class, 'destroy'])->middleware(['auth', 'verified'])->name('timer.delete');
 
 require __DIR__.'/auth.php';
