@@ -1,6 +1,6 @@
 <template>
   <Head title="Account Dashboard" />
-  <div v-if="timers.length > 1">
+  <div v-if="timers.length >= 1">
     <timer
       :canLogin="canLogin"
       :canRegister="canRegister"
@@ -8,7 +8,7 @@
     />
 
     <!-- Selectable timers -->
-    <div class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60">
+    <div v-if="timers.length > 1" class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60">
       <div v-for="timer in timers" :key="timer.id">
         <div class="-my-8 max-w-4xl">
           <TimerInfo
