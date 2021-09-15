@@ -137,7 +137,6 @@ export default {
         if (end) {
           this.setCounter = 0;
           this.started = false;
-          
           this.stop();
       }
       this.targetTime = this.currTimer.duration * 1000;

@@ -20168,7 +20168,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currTimer: this.timers[0]
+      currTimer: this.timers[0],
+      timerKey: 0
     };
   },
   props: {
@@ -20179,6 +20180,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     updateCurrTimer: function updateCurrTimer(newTimer) {
       this.currTimer = newTimer;
+      this.timerKey += 1;
     }
   }
 });
@@ -21978,6 +21980,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Account Dashboard"
   }), $props.timers.length >= 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_timer, {
+    key: this.timerKey,
     canLogin: $props.canLogin,
     canRegister: $props.canRegister,
     currTimer: this.currTimer
@@ -21994,7 +21997,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       })
     }, null, 8
     /* PROPS */
-    , ["timer"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"absolute right-0\">\n          <SaveOrDeleteTimer :timer=\"timer\"/>\n        </div> "), _hoisted_5]);
+    , ["timer"])]), _hoisted_5]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <BreezeAuthenticatedLayout>\n        <template #header>\n            <h2 class=\"font-semibold text-xl text-gray-800 leading-tight\">\n                Dashboard\n            </h2>\n        </template>\n\n        <div class=\"py-12\">\n            <div class=\"max-w-7xl mx-auto sm:px-6 lg:px-8\">\n                <div class=\"bg-white overflow-hidden shadow-sm sm:rounded-lg\">\n                    <div class=\"p-6 bg-white border-b border-gray-200\">\n                        You're logged in!\n                    </div>\n                </div>\n            </div>\n        </div>\n    </BreezeAuthenticatedLayout> ")], 64

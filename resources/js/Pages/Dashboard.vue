@@ -2,6 +2,7 @@
   <Head title="Account Dashboard" />
   <div v-if="timers.length >= 1">
     <timer
+      :key="this.timerKey"
       :canLogin="canLogin"
       :canRegister="canRegister"
       :currTimer="this.currTimer"
@@ -64,6 +65,7 @@ export default {
   data() {
     return {
       currTimer: this.timers[0],
+      timerKey: 0,
     };
   },
   props: {
@@ -74,6 +76,7 @@ export default {
   methods: {
     updateCurrTimer(newTimer) {
       this.currTimer = newTimer;
+      this.timerKey += 1;
     },
   },
 };
