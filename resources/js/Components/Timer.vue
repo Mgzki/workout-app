@@ -35,19 +35,19 @@
 
     <!-- Timer Controls -->
     <div class="mx-auto flex justify-around">
-      <button v-if="!started | paused" @click="allSets" class="bg-green-500 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded">
+      <button v-if="!started | paused" @click="allSets" class="bg-green-500 hover:bg-green-400 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded">
         Start
       </button>
       <button v-else class="bg-gray-600 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded line-through">
         Start
       </button>
-      <button v-if="started && !paused" @click="stop" class="bg-gray-400 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded">
+      <button v-if="started && !paused" @click="stop" class="bg-gray-400 hover:bg-gray-300 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded">
         Pause
       </button>
       <button v-else class="bg-gray-600 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded line-through">
         Pause
       </button>
-      <button @click="reset" class="bg-red-500 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded">
+      <button @click="reset" class="bg-red-500 hover:bg-red-400 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded">
         Reset
       </button>
     </div>
@@ -164,9 +164,6 @@ export default {
       }
       this.reset(true);
       this.started = false;
-    },
-    updateCurrTimer(newTimer) {
-      this.currTimer = newTimer;
     },
     getVal(newVal){
       if (newVal.attrName == 'sets') {
