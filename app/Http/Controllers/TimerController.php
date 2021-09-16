@@ -36,12 +36,17 @@ class TimerController extends Controller
 
     public function update(Timer $timer)
     {
-        
+        $timer->update(request()->validate([
+            'sets' => 'required',
+            'rest' => 'required',
+            'duration' => 'required',
+        ]));
+        return redirect('/dashboard')->withSuccess('Timer Updated');
     }
 
     public function destroy(Timer $timer)
     {   
         Timer::find($timer->id)->delete();
-        return redirect('/dashboard')->withSuccess('Timer deleted');
+        return redirect('/dashboard')->withSuccess('Timer Deleted');
     }
 }

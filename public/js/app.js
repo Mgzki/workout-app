@@ -19704,28 +19704,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      updateSets: this.currAttr.sets,
+      updateRest: this.currAttr.rest,
+      updateDuration: this.currAttr.duration
+    };
   },
   components: {
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Link
   },
   props: {
-    timer: Object
+    timer: Object,
+    currAttr: Object
   },
   methods: {
     updateCurrTimer: function updateCurrTimer() {
       this.$emit('updateCurrTimer', this.timer);
     },
-    aaaa: function aaaa() {
-      console.log('button');
-    },
     deleteTimer: function deleteTimer(id) {
       if (confirm('Delete this timer?')) {
         this.$inertia["delete"]('/dashboard/' + id).then(function () {});
       }
+    },
+    updateTimer: function updateTimer() {
+      if (confirm('Update this timer?')) {
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.patch('/dashboard/' + this.currAttr.id, this.currAttr);
+      }
+
+      this.updateCurrTimer();
     }
   }
 });
@@ -20894,16 +20905,16 @@ var _hoisted_2 = {
   "class": "font-bold text-left"
 };
 var _hoisted_3 = {
-  "class": "flex w-24 xs:w-40 sm:w-56 justify-between"
+  "class": "flex w-24 xs:w-40 sm:w-56 justify-between text-right"
 };
 var _hoisted_4 = {
-  "class": "px-2"
+  "class": "w-6"
 };
 var _hoisted_5 = {
-  "class": "px-2"
+  "class": "w-6"
 };
 var _hoisted_6 = {
-  "class": "px-2"
+  "class": "mr-2 px-1 w-10"
 };
 var _hoisted_7 = {
   "class": "flex"
@@ -20944,7 +20955,7 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_11 = [_hoisted_10];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    onClick: _cache[2] || (_cache[2] = function () {
+    onClick: _cache[7] || (_cache[7] = function () {
       return $options.updateCurrTimer && $options.updateCurrTimer.apply($options, arguments);
     }),
     "class": "px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300"
@@ -20956,17 +20967,52 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.duration), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return $options.aaaa && $options.aaaa.apply($options, arguments);
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return _ctx.submit && _ctx.submit.apply(_ctx, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "number",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.updateSets = $event;
+    }),
+    "class": "hidden"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateSets]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "number",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.updateRest = $event;
+    }),
+    "class": "hidden"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateRest]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "number",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.updateDuration = $event;
+    }),
+    "class": "hidden"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.updateDuration]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    type: "submit",
+    onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return $options.updateTimer();
     }, ["stop"])),
     "class": "px-1"
-  }, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delete "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+  }, _hoisted_9)], 32
+  /* HYDRATE_EVENTS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Delete "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return $options.deleteTimer($props.timer.id);
     }, ["stop"])),
     "class": "px-0 md:px-1"
-  }, _hoisted_11)])]);
+  }, _hoisted_11)], 32
+  /* HYDRATE_EVENTS */
+  )])]);
 }
 
 /***/ }),
@@ -22115,12 +22161,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "hover:bg-blue-100 relative flex"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_TimerInfo, {
       timer: timer,
+      currAttr: $data.currTimer,
       onUpdateCurrTimer: _cache[0] || (_cache[0] = function ($event) {
         return $options.updateCurrTimer($event);
       })
     }, null, 8
     /* PROPS */
-    , ["timer"])]), _hoisted_5]);
+    , ["timer", "currAttr"])]), _hoisted_5]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CreateTimer)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <BreezeAuthenticatedLayout>\n        <template #header>\n            <h2 class=\"font-semibold text-xl text-gray-800 leading-tight\">\n                Dashboard\n            </h2>\n        </template>\n\n        <div class=\"py-12\">\n            <div class=\"max-w-7xl mx-auto sm:px-6 lg:px-8\">\n                <div class=\"bg-white overflow-hidden shadow-sm sm:rounded-lg\">\n                    <div class=\"p-6 bg-white border-b border-gray-200\">\n                        You're logged in!\n                    </div>\n                </div>\n            </div>\n        </div>\n    </BreezeAuthenticatedLayout> ")], 64

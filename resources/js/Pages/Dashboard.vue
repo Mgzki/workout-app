@@ -20,6 +20,7 @@
         <div class="">
           <TimerInfo
             :timer="timer"
+            :currAttr="currTimer"
             @updateCurrTimer="updateCurrTimer($event)"
           />
         </div>
