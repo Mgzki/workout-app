@@ -2,10 +2,10 @@
   <button @click='updateCurrTimer'
     class="px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300"
   >
-    <div class="px-2 w-28 xs:w-44 sm:w-60">
+    <div class="px-2 w-28 sm:w-60">
         <h1 class="font-bold text-left">{{ timer.name }}</h1>
     </div>
-    <div class="flex w-24 xs:w-40 sm:w-56 justify-between text-right">
+    <div class="flex w-24 sm:w-56 justify-between text-right">
         <p class="w-6">{{ timer.sets }}</p>
         <p class="w-6">{{ timer.rest }}</p>
         <p class="mr-2 px-1 w-10">{{ timer.duration }}</p>

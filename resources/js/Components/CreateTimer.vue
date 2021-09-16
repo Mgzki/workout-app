@@ -1,18 +1,18 @@
 <template>
   <form @submit.prevent="submit">
     <div class="px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300 hover:bg-blue-100 relative">
-        <div class="px-2 w-28 xs:w-46 sm:w-60">
+        <div class="px-2 w-28 sm:w-60">
             <!-- Name Input -->
             <input v-model="form.name" type="text" placeholder="Name" 
-                class="px-2 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg w-24 s:w-36 md:w-full text-left">
+                class="px-2 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg w-full s:w-36 md:w-full text-left">
         </div>
-        <div class="flex w-30 xs:w-46 sm:w-56 justify-between">
+        <div class="flex w-30 sm:w-56 justify-between">
             <!-- Sets -->
-            <input v-model="form.sets" type="number" placeholder="Sets" class="w-8 md:w-16 mx-1 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left">
+            <input v-model="form.sets" type="number" placeholder="Sets" class="w-8 sm:w-16 mx-1 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left">
             <!-- Rest -->
-            <input v-model="form.rest" type="number" placeholder="Rest" class="w-8 md:w-16 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left">
+            <input v-model="form.rest" type="number" placeholder="Rest" class="w-8 sm:w-16 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left">
             <!-- Duration -->
-            <input v-model="form.duration" type="number" placeholder="Duration" class="w-8 md:w-16 mx-1 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left">
+            <input v-model="form.duration" type="number" placeholder="Duration" class="w-8 sm:w-16 mx-1 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left">
         </div>
         <div class="flex">
         <!-- Save -->

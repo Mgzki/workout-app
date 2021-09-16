@@ -20381,10 +20381,10 @@ var _hoisted_1 = {
   "class": "px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300 hover:bg-blue-100 relative"
 };
 var _hoisted_2 = {
-  "class": "px-2 w-28 xs:w-46 sm:w-60"
+  "class": "px-2 w-28 sm:w-60"
 };
 var _hoisted_3 = {
-  "class": "flex w-30 xs:w-46 sm:w-56 justify-between"
+  "class": "flex w-30 sm:w-56 justify-between"
 };
 var _hoisted_4 = {
   "class": "flex"
@@ -20418,7 +20418,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "text",
     placeholder: "Name",
-    "class": "px-2 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg w-24 s:w-36 md:w-full text-left"
+    "class": "px-2 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg w-full s:w-36 md:w-full text-left"
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sets "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -20427,7 +20427,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "number",
     placeholder: "Sets",
-    "class": "w-8 md:w-16 mx-1 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left"
+    "class": "w-8 sm:w-16 mx-1 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left"
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.sets]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Rest "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -20436,7 +20436,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "number",
     placeholder: "Rest",
-    "class": "w-8 md:w-16 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left"
+    "class": "w-8 sm:w-16 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left"
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.rest]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Duration "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -20445,7 +20445,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "number",
     placeholder: "Duration",
-    "class": "w-8 md:w-16 mx-1 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left"
+    "class": "w-8 sm:w-16 mx-1 py-2 font-semibold float-left bg-white border border-gray-300 rounded-lg text-left"
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.duration]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Save "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -20566,7 +20566,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "px-1 md:px-4 py-2 font-semibold float-left w-22 md:w-32 "
+  "class": "px-1 md:px-4 py-2 font-semibold float-left w-1/3 md:w-32 "
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")]);
@@ -20899,13 +20899,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "px-2 w-28 xs:w-44 sm:w-60"
+  "class": "px-2 w-28 sm:w-60"
 };
 var _hoisted_2 = {
   "class": "font-bold text-left"
 };
 var _hoisted_3 = {
-  "class": "flex w-24 xs:w-40 sm:w-56 justify-between text-right"
+  "class": "flex w-24 sm:w-56 justify-between text-right"
 };
 var _hoisted_4 = {
   "class": "w-6"
