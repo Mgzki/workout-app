@@ -1,7 +1,7 @@
 <template>
   <div
     id="app"
-    class="bg-gray-100 rounded-lg py-4 shadow-xs my-10 border md:px-8"
+    class="bg-gray-100 rounded-lg px-1 py-4 shadow-xs my-10 border md:px-8 "
   >
     <h1 class="font-bold text-md pl-2 md:text-xl">
       {{ currTimer.name }}
@@ -19,35 +19,35 @@
       md:border md:rounded-xl
       "
     >
-      <h1 v-if="targetTime > 0" class=" text-6xl text-gray-700 px-4 md:text-8xl">
+      <h1 v-if="targetTime > 0" class=" text-6xl text-gray-700 px-1 md:px-4 md:text-8xl">
         {{ formattedTime }}
       </h1>
       <h1
         v-else-if="restTime > 0"
-        class=" text-6xl text-orange-500 px-4 md:text-8xl"
+        class=" text-6xl text-orange-500 px-1 md:px-4 md:text-8xl"
       >
         {{ formattedTime }}
       </h1>
-      <h1 v-else class=" text-6xl text-red-500 px-4 md:text-8xl">
+      <h1 v-else class=" text-6xl text-red-500 px-1 md:px-4 md:text-8xl">
         {{ formattedTime }}
       </h1>
     </div>
 
     <!-- Timer Controls -->
     <div class="mx-auto flex justify-around">
-      <button v-if="!started | paused" @click="allSets" class="bg-green-500 hover:bg-green-400 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded">
+      <button v-if="!started | paused" @click="allSets" class="bg-green-500 hover:bg-green-400 py-2 px-1 mx-1 md:px-6 md:mx-3 rounded">
         Start
       </button>
-      <button v-else class="bg-gray-600 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded line-through">
+      <button v-else class="bg-gray-600 py-2 px-1 mx-1 md:px-6 md:mx-3 rounded line-through">
         Start
       </button>
-      <button v-if="started && !paused" @click="stop" class="bg-gray-400 hover:bg-gray-300 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded">
+      <button v-if="started && !paused" @click="stop" class="bg-gray-400 hover:bg-gray-300 py-2 px-1 mx-1 md:px-6 md:mx-3 rounded">
         Pause
       </button>
-      <button v-else class="bg-gray-600 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded line-through">
+      <button v-else class="bg-gray-600 py-2 px-1  md:px-6 md:mx-3 rounded line-through">
         Pause
       </button>
-      <button @click="reset" class="bg-red-500 hover:bg-red-400 py-2 px-2 mx-1 md:px-6 md:mx-3 rounded">
+      <button @click="reset" class="bg-red-500 hover:bg-red-400 py-2 px-1  md:px-6 md:mx-3 rounded">
         Reset
       </button>
     </div>
