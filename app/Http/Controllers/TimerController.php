@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Timer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -40,7 +41,7 @@ class TimerController extends Controller
             'sets' => 'required',
             'rest' => 'required',
             'duration' => 'required',
-        ]));
+        ]) + ['updated_at' => Carbon::now()]);
         return redirect('/dashboard')->withSuccess('Timer Updated');
     }
 

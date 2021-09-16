@@ -19736,7 +19736,7 @@ __webpack_require__.r(__webpack_exports__);
         _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.patch('/dashboard/' + this.currAttr.id, this.currAttr);
       }
 
-      this.updateCurrTimer();
+      this.$emit('updateCurrTimer', this.currAttr);
     }
   }
 });

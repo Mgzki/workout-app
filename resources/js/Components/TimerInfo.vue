@@ -72,7 +72,7 @@ export default {
         if (confirm('Update this timer?')) {
           Inertia.patch('/dashboard/' + this.currAttr.id, this.currAttr)
         }
-        this.updateCurrTimer();
+        this.$emit('updateCurrTimer', this.currAttr)
       }
 
   }
