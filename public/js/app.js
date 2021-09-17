@@ -19532,13 +19532,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return new Promise(function (resolve) {
                   _this.paused = false;
                   _this.timer = setInterval(function () {
-                    duration -= 1000;
+                    duration -= 1000; // Reduces the actual values used in displaying the timer
 
-                    if (rest) {
-                      _this.restTime -= 1000;
-                    } else {
-                      _this.targetTime -= 1000;
-                    }
+                    // Reduces the actual values used in displaying the timer
+                    rest ? _this.restTime -= 1000 : _this.targetTime -= 1000;
 
                     if (duration < 1000) {
                       clearInterval(_this.timer);
@@ -19606,14 +19603,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
-                return _this3.start();
+                if (!(_this3.targetTime < 1000)) {
+                  _context3.next = 5;
+                  break;
+                }
 
-              case 2:
-                _context3.next = 4;
+                _context3.next = 3;
                 return _this3.wait(_this3.restTime, true);
 
-              case 4:
+              case 3:
+                _context3.next = 7;
+                break;
+
+              case 5:
+                _context3.next = 7;
+                return _this3.start();
+
+              case 7:
+                _context3.next = 9;
+                return _this3.wait(_this3.restTime, true);
+
+              case 9:
               case "end":
                 return _context3.stop();
             }

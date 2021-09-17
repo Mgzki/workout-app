@@ -111,11 +111,8 @@ export default {
         this.paused = false;
         this.timer = setInterval(() => {
           duration -= 1000;
-          if (rest) {
-            this.restTime -= 1000;
-          } else {
-            this.targetTime -= 1000;
-          }
+          // Reduces the actual values used in displaying the timer
+          rest ? this.restTime -= 1000 : this.targetTime -= 1000;
           if (duration < 1000) {
             clearInterval(this.timer);
             resolve("resolved");
@@ -145,18 +142,15 @@ export default {
     },
 
     async startSet() {
-      await this.start(); //starts set timer
-      await this.wait(this.restTime, true); //starts rest period timer
+      this.targetTime < 1000 ? await this.wait(this.restTime, true) : await this.start(); await this.wait(this.restTime, true);
+      // await this.start(); //starts set timer
+      // await this.wait(this.restTime, true); //starts rest period timer
     },
 
     // runs startSet() as long as there are still sets to be completed
     async allSets() {
       this.started = true;
-      for (
-        this.setCounter;
-        this.setCounter < this.currTimer.sets;
-        this.setCounter++
-      ) {
+      for (this.setCounter; this.setCounter < this.currTimer.sets; this.setCounter++) {
         await this.startSet();
         this.reset(false);
         this.setsRemaining;
