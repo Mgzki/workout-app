@@ -3,7 +3,7 @@
         <nav class="md:flex md:justify-between md:items-center">
             <div>
                 <a href="/">
-                    <img src="/images/Site-Logo.png" alt="Laracasts Logo" width="165" height="16">
+                    <img src="/images/Site-Logo.png" width="165" height="16">
                 </a>
             </div>
 
@@ -35,7 +35,7 @@
 
             <div class="mt-10">
                 <div class="relative inline-block mx-auto rounded-full">
-                    blah blah
+                    Nothing here yet
                 </div>
             </div>
         </footer>

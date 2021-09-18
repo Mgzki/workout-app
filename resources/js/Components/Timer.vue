@@ -120,9 +120,11 @@ export default {
         }, 1000);
       });
     },
+
     async start() {
       this.timer = await this.wait(this.targetTime, false);
     },
+    
     stop() {
       if (this.timer) {
         clearInterval(this.timer);
@@ -130,6 +132,7 @@ export default {
         this.paused = true;
       }
     },
+
     reset(end) {
         if (end) {
           this.setCounter = 0;
@@ -141,10 +144,10 @@ export default {
       this.paused = false;
     },
 
+    // helper function for allSets() and for when pause is clicked.
+    // if the active portion of the timer has finished, start the rest period immediately; otherwise run the full set
     async startSet() {
       this.targetTime < 1000 ? await this.wait(this.restTime, true) : await this.start(); await this.wait(this.restTime, true);
-      // await this.start(); //starts set timer
-      // await this.wait(this.restTime, true); //starts rest period timer
     },
 
     // runs startSet() as long as there are still sets to be completed
@@ -155,9 +158,11 @@ export default {
         this.reset(false);
         this.setsRemaining;
       }
+      // reset the timer to default settings upon completion of the workout
       this.reset(true);
       this.started = false;
     },
+
     getVal(newVal){
       if (newVal.attrName == 'sets') {
         this.currTimer.sets = newVal.newVal
@@ -171,6 +176,7 @@ export default {
       this.reset()
     }
   },
+
   computed: {
     formattedTime() {
       const date = new Date(null);
@@ -180,6 +186,7 @@ export default {
       const utc = date.toUTCString();
       return utc.substr(utc.indexOf(":") - 2, 8);
     },
+    
     setsRemaining() {
       return this.currTimer.sets - this.setCounter;
     },
