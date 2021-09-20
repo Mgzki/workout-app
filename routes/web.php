@@ -26,14 +26,6 @@ Route::get('/', function () {
     ]);
 });
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard', [
-//         'canLogin' => false,
-//         'canRegister' => false,
-//         'timers' => Auth::user()->timers()->get(),
-//     ]);
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::get('/dashboard', [TimerController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::post('/dashboard', [TimerController::class, 'store'])->middleware(['auth', 'verified'])->name('timer.store');
 Route::patch('/dashboard/{timer}', [TimerController::class, 'update'])->middleware(['auth', 'verified'])->name('timer.update');

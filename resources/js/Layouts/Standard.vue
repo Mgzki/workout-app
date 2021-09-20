@@ -1,23 +1,23 @@
 <template>
     <section class="px-3 py-4 md:px-6 md:py-8">
-        <nav class="md:flex md:justify-between md:items-center">
+        <nav class="flex justify-between items-center">
             <div>
                 <a href="/">
-                    <img src="/images/Site-Logo.png" width="165" height="16">
+                    <img src="/images/Site-Logo.png" width="165" height="16" >
                 </a>
             </div>
 
-            <div v-if="canLogin" class="hidden fixed right-1 px-8 py-4 sm:block">
+            <div v-if="canLogin" class="fixed right-1 sm:px-8 py-4 block">
                 <Link v-if="$page.props.auth.user" href="/dashboard" class="text-sm text-gray-500 underline">
                     Dashboard
                 </Link>
-
+                
                 <template v-else>
                     <Link :href="route('login')" class="text-xs font-bold text-gray-700 underline uppercase">
                         Log in
                     </Link>
 
-                    <Link v-if="canRegister" :href="route('register')" class="ml-4 text-xs font-bold text-gray-700 underline uppercase">
+                    <Link v-if="canRegister" :href="route('register')" class="ml-1 sm:ml-4 text-xs font-bold text-gray-700 underline uppercase">
                         Register
                     </Link>
                 </template>

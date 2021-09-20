@@ -13,8 +13,6 @@ class TimerController extends Controller
     public function index()
     {
         return Inertia::render('Dashboard', [
-            'canLogin' => false,
-            'canRegister' => false,
             'timers' => Auth::user()->timers()->get(),
         ]);
     }
