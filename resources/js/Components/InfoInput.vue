@@ -4,18 +4,7 @@
     v-model="newVal"
     type="number"
     :placeholder="val"
-    class="
-      px-1
-      md:px-4
-      py-2
-      font-semibold
-      bg-gray-100
-      border border-gray-300
-      rounded-lg
-      w-12
-      md:w-24
-      text-center
-    "
+    class="px-1 md:px-4 py-2 font-semibold bg-gray-100 border border-gray-300 rounded-lg w-12 md:w-24 text-center "
   />
 </template>
 

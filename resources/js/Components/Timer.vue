@@ -14,42 +14,27 @@
     </div>
 
     <!-- Time Display -->
-    <div
-      class="mx-auto flex justify-center bg-gray-200 mb-4 shadow-xs  border-gray-300 
-      md:border md:rounded-xl
-      "
-    >
-      <h1 v-if="targetTime > 0" class=" text-6xl text-gray-700 px-1 md:px-4 md:text-8xl">
-        {{ formattedTime }}
-      </h1>
-      <h1
-        v-else-if="restTime > 0"
-        class=" text-6xl text-orange-500 px-1 md:px-4 md:text-8xl"
-      >
-        {{ formattedTime }}
-      </h1>
-      <h1 v-else class=" text-6xl text-red-500 px-1 md:px-4 md:text-8xl">
-        {{ formattedTime }}
-      </h1>
+    <div class="mx-auto flex justify-center bg-gray-200 mb-4 shadow-xs  border-gray-300 md:border md:rounded-xl">
+      <!-- Active set -->
+      <DisplayTime v-if="targetTime > 0" class="text-gray-700"> {{ formattedTime }} </DisplayTime>
+      <!-- Rest set -->
+      <DisplayTime v-else-if="restTime > 0" class="text-orange-500"> {{ formattedTime }} </DisplayTime>
+      <!-- Reached zero -->
+      <DisplayTime v-else class="text-red-500"> {{ formattedTime }} </DisplayTime>
     </div>
 
     <!-- Timer Controls -->
     <div class="mx-auto flex justify-around">
-      <button v-if="!started | paused" @click="allSets" class="bg-green-500 hover:bg-green-400 py-2 px-1 mx-1 md:px-6 md:mx-3 rounded">
-        Start
-      </button>
-      <button v-else class="bg-gray-600 py-2 px-1 mx-1 md:px-6 md:mx-3 rounded line-through">
-        Start
-      </button>
-      <button v-if="started && !paused" @click="stop" class="bg-gray-400 hover:bg-gray-300 py-2 px-1 mx-1 md:px-6 md:mx-3 rounded">
-        Pause
-      </button>
-      <button v-else class="bg-gray-600 py-2 px-1  md:px-6 md:mx-3 rounded line-through">
-        Pause
-      </button>
-      <button @click="reset" class="bg-red-500 hover:bg-red-400 py-2 px-1  md:px-6 md:mx-3 rounded">
-        Reset
-      </button>
+      <!-- Start -->
+      <TimerButton v-if="!started | paused" @click="allSets" class="bg-green-500 hover:bg-green-400">Start</TimerButton>
+      <!-- Disabled Start -->
+      <TimerButton v-else class="bg-gray-600 line-through" >Start</TimerButton>
+      <!-- Pause -->
+      <TimerButton v-if="started && !paused" @click="stop" class="bg-gray-400 hover:bg-gray-300">Pause</TimerButton>
+      <!-- Disabled Pause -->
+      <TimerButton v-else class="bg-gray-600 line-through">Pause</TimerButton>
+      <!-- Reset -->
+      <TimerButton @click="reset" class="bg-red-500 hover:bg-red-400">Reset</TimerButton>
     </div>
 
     <!-- Timer Attributes -->
@@ -64,10 +49,13 @@
 
       <!-- Timer info -->
       <div class="text-sm  flex justify-around text-center  md:text-md pb-4">
+        <!-- Sets -->
         <InfoInput :val="setsRemaining" name="sets" 
           @getVal="getVal($event)"/>
+        <!-- Rest -->
         <InfoInput :val="currTimer.rest" name="rest"
           @getVal="getVal($event)"/>
+        <!-- Duration -->
         <InfoInput :val="currTimer.duration" name="duration"
           @getVal="getVal($event)"/>
       </div>
@@ -80,6 +68,8 @@
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import StandardLayout from "@/Layouts/Standard.vue";
 import InfoInput from "@/Components/InfoInput.vue";
+import TimerButton from "@/Components/TimerButton.vue";
+import DisplayTime from "@/Components/DisplayTime.vue";
 import InfoHeader from "@/Components/InfoHeader.vue";
 
 export default {
@@ -89,6 +79,8 @@ export default {
     Link,
     InfoInput,
     InfoHeader,
+    TimerButton,
+    DisplayTime,
   },
   props: {
     currTimer: Object,
