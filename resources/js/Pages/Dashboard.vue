@@ -8,7 +8,7 @@
       :currTimer="this.currTimer"
     />
     <!-- Timer Descriptors -->
-    <div class="flex flex-1 justify-around font-semibold underline px-1 pt-2 text-xs md:text-lg">
+    <div class="flex flex-1 justify-around font-semibold underline px-1 text-xs md:text-lg">
         <p class="w-24 sm:w-36 md:w-56 ml-2">Name</p>
         <p class="px-1 md:px-4">Sets</p>
         <p class="px-1 md:px-4">Rest(s)</p>

@@ -21129,7 +21129,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[7] || (_cache[7] = function () {
       return $options.updateCurrTimer && $options.updateCurrTimer.apply($options, arguments);
     }),
-    "class": "px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300"
+    "class": "px-1 py-4 md:px-2 flex flex-grow divide-x-2 divide-gray-300"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.name), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.timer.sets), 1
@@ -21422,7 +21422,7 @@ var _hoisted_6 = {
 };
 var _hoisted_7 = {
   type: "button",
-  "class": "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+  "class": "inline-flex items-center px-3 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
 };
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
@@ -21450,7 +21450,7 @@ var _hoisted_11 = {
   viewBox: "0 0 24 24"
 };
 var _hoisted_12 = {
-  "class": "pt-4 pb-1 border-t border-gray-200"
+  "class": " pb-1 border-t border-gray-200"
 };
 var _hoisted_13 = {
   "class": "px-4"
@@ -22251,7 +22251,7 @@ var _hoisted_1 = {
   key: 0
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-1 justify-around font-semibold underline px-1 pt-2 text-xs md:text-lg\"><p class=\"w-24 sm:w-36 md:w-56 ml-2\">Name</p><p class=\"px-1 md:px-4\">Sets</p><p class=\"px-1 md:px-4\">Rest(s)</p><p class=\"px-1 md:px-4\">Duration(s)</p></div>", 1);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-1 justify-around font-semibold underline px-1 text-xs md:text-lg\"><p class=\"w-24 sm:w-36 md:w-56 ml-2\">Name</p><p class=\"px-1 md:px-4\">Sets</p><p class=\"px-1 md:px-4\">Rest(s)</p><p class=\"px-1 md:px-4\">Duration(s)</p></div>", 1);
 
 var _hoisted_3 = {
   key: 0,
@@ -22356,7 +22356,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-var appName = ((_window$document$getE = window.document.getElementsByTagName('title')[0]) === null || _window$document$getE === void 0 ? void 0 : _window$document$getE.innerText) || 'Laravel';
+var appName = ((_window$document$getE = window.document.getElementsByTagName('title')[0]) === null || _window$document$getE === void 0 ? void 0 : _window$document$getE.innerText) || 'Workout';
 (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.createInertiaApp)({
   title: function title(_title) {
     return "".concat(_title, " - ").concat(appName);

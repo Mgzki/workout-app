@@ -1,6 +1,6 @@
 <template>
   <button @click='updateCurrTimer'
-    class="px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300"
+    class="px-1 py-4 md:px-2 flex flex-grow divide-x-2 divide-gray-300"
   >
     <div class="px-2 w-28 sm:w-60">
         <h1 class="font-bold text-left">{{ timer.name }}</h1>
