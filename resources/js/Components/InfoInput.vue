@@ -18,7 +18,6 @@ export default {
   props: {
     val: Number,
     name: String,
-    //   model: String,
   },
   methods: {
     sendVal() {

@@ -84,8 +84,6 @@ export default {
   },
   props: {
     currTimer: Object,
-    canLogin: Boolean,
-    canRegister: Boolean,
   },
   data() {
     return {

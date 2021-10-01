@@ -3,8 +3,6 @@
   <div v-if="timers.length >= 1">
     <timer
       :key="this.timerKey"
-      :canLogin="canLogin"
-      :canRegister="canRegister"
       :currTimer="this.currTimer"
     />
     <!-- Timer Descriptors -->
@@ -30,6 +28,9 @@
     <div class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60 mt-2">
       <CreateTimer/>
     </div>
+  </div>
+  <div v-else>
+    <CreateTimer/>
   </div>
 </template>
 
@@ -57,8 +58,6 @@ export default {
   },
   props: {
     timers: [Object],
-    // canLogin: Boolean,
-    // canRegister: Boolean,
   },
   methods: {
     updateCurrTimer(newTimer) {

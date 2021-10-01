@@ -19375,8 +19375,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     val: Number,
-    name: String //   model: String,
-
+    name: String
   },
   methods: {
     sendVal: function sendVal() {
@@ -19526,9 +19525,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     DisplayTime: _Components_DisplayTime_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: {
-    currTimer: Object,
-    canLogin: Boolean,
-    canRegister: Boolean
+    currTimer: Object
   },
   data: function data() {
     return {
@@ -20281,9 +20278,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    timers: [Object] // canLogin: Boolean,
-    // canRegister: Boolean,
-
+    timers: [Object]
   },
   methods: {
     updateCurrTimer: function updateCurrTimer(newTimer) {
@@ -22268,6 +22263,9 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_6 = {
   "class": "bg-gray-100 rounded-lg shadow border overflow-auto max-h-60 mt-2"
 };
+var _hoisted_7 = {
+  key: 1
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -22281,12 +22279,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Account Dashboard"
   }), $props.timers.length >= 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_timer, {
     key: this.timerKey,
-    canLogin: _ctx.canLogin,
-    canRegister: _ctx.canRegister,
     currTimer: this.currTimer
   }, null, 8
   /* PROPS */
-  , ["canLogin", "canRegister", "currTimer"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Descriptors "), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Selectable timers "), $props.timers.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.timers, function (timer) {
+  , ["currTimer"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Descriptors "), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Selectable timers "), $props.timers.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.timers, function (timer) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: timer.id,
       "class": "hover:bg-blue-100 relative flex"
@@ -22301,7 +22297,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["timer", "currAttr"])]), _hoisted_5]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CreateTimer)])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CreateTimer)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CreateTimer)]))], 64
   /* STABLE_FRAGMENT */
   );
 }
