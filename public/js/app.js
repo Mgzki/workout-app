@@ -20422,7 +20422,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300 hover:bg-blue-100 relative"
+  "class": "px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300 relative"
 };
 var _hoisted_2 = {
   "class": "px-2 w-28 sm:w-60"
@@ -22249,7 +22249,6 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex flex-1 justify-around font-semibold underline px-1 text-xs md:text-lg\"><p class=\"w-24 sm:w-36 md:w-56 ml-2\">Name</p><p class=\"px-1 md:px-4\">Sets</p><p class=\"px-1 md:px-4\">Rest(s)</p><p class=\"px-1 md:px-4\">Duration(s)</p></div>", 1);
 
 var _hoisted_3 = {
-  key: 0,
   "class": "bg-gray-100 rounded-lg shadow border overflow-auto max-h-60"
 };
 var _hoisted_4 = {
@@ -22264,7 +22263,8 @@ var _hoisted_6 = {
   "class": "bg-gray-100 rounded-lg shadow border overflow-auto max-h-60 mt-2"
 };
 var _hoisted_7 = {
-  key: 1
+  key: 1,
+  "class": "bg-gray-100 rounded-lg shadow border overflow-auto max-h-60 mt-2"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
@@ -22277,12 +22277,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, {
     title: "Account Dashboard"
-  }), $props.timers.length >= 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_timer, {
+  }), $props.timers.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_timer, {
     key: this.timerKey,
     currTimer: this.currTimer
   }, null, 8
   /* PROPS */
-  , ["currTimer"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Descriptors "), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Selectable timers "), $props.timers.length > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.timers, function (timer) {
+  , ["currTimer"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Timer Descriptors "), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Selectable timers "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.timers, function (timer) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: timer.id,
       "class": "hover:bg-blue-100 relative flex"
@@ -22297,7 +22297,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["timer", "currAttr"])]), _hoisted_5]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CreateTimer)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CreateTimer)]))], 64
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CreateTimer)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CreateTimer, {
+    key: this.currTimer
+  })]))], 64
   /* STABLE_FRAGMENT */
   );
 }

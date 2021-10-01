@@ -1,6 +1,6 @@
 <template>
   <Head title="Account Dashboard" />
-  <div v-if="timers.length >= 1">
+  <div v-if="timers.length > 0">
     <timer
       :key="this.timerKey"
       :currTimer="this.currTimer"
@@ -13,7 +13,7 @@
         <p class="px-1 md:px-4">Duration(s)</p>
     </div>
     <!-- Selectable timers -->
-    <div v-if="timers.length > 1" class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60">
+    <div class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60">
       <div v-for="timer in timers" :key="timer.id" class="hover:bg-blue-100 relative flex">
         <div class="">
           <TimerInfo
@@ -29,8 +29,8 @@
       <CreateTimer/>
     </div>
   </div>
-  <div v-else>
-    <CreateTimer/>
+  <div v-else class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60 mt-2">
+    <CreateTimer :key="this.currTimer"/>
   </div>
 </template>
 

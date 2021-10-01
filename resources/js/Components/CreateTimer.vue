@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="submit">
-    <div class="px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300 hover:bg-blue-100 relative">
+    <div class="px-1 py-6 md:px-2 flex flex-grow divide-x-2 divide-gray-300 relative">
         <div class="px-2 w-28 sm:w-60">
             <!-- Name Input -->
             <input v-model="form.name" type="text" placeholder="Name" 
