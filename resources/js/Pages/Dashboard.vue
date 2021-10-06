@@ -1,36 +1,34 @@
 <template>
   <Head title="Account Dashboard" />
-  <div v-if="timers.length > 0">
-    <timer
-      :key="this.timerKey"
-      :currTimer="this.currTimer"
-    />
-    <!-- Timer Descriptors -->
-    <div class="flex flex-1 justify-around font-semibold underline px-1 text-xs md:text-lg">
+  <div>
+    <div v-if="timers.length > 0">
+      <timer
+        :key="this.timerKey"
+        :currTimer="this.currTimer"
+      />
+      <!-- Timer Descriptors -->
+      <div class="flex flex-1 justify-around font-semibold underline px-1 text-xs md:text-lg">
         <p class="w-24 sm:w-36 md:w-56 ml-2">Name</p>
         <p class="px-1 md:px-4">Sets</p>
         <p class="px-1 md:px-4">Rest(s)</p>
         <p class="px-1 md:px-4">Duration(s)</p>
+      </div>
     </div>
+    
     <!-- Selectable timers -->
-    <div class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60">
+    <div v-if="timers.length > 0" :key="this.currTimer" class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60">
       <div v-for="timer in timers" :key="timer.id" class="hover:bg-blue-100 relative flex">
-        <div class="">
-          <TimerInfo
-            :timer="timer"
-            :currAttr="currTimer"
-            @updateCurrTimer="updateCurrTimer($event)"
-          />
-        </div>
-        <hr>
+        <TimerInfo
+          :timer="timer"
+          :currAttr="currTimer"
+          @updateCurrTimer="updateCurrTimer($event)"
+        />
+        <hr v-if="timers.length > 0">
       </div>
     </div>
     <div class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60 mt-2">
-      <CreateTimer/>
+      <CreateTimer :key="this.currTimer"/>
     </div>
-  </div>
-  <div v-else class="bg-gray-100 rounded-lg shadow border overflow-auto max-h-60 mt-2">
-    <CreateTimer :key="this.currTimer"/>
   </div>
 </template>
 
